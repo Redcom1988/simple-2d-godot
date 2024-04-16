@@ -56,35 +56,18 @@ func clampEntity():
 
 func animation_handler():
 	get_input()
-	if dead == true:
+
+	if dead:
 		$AnimatedSprite2D.animation = "death"
 		$AnimatedSprite2D.stop()
+	elif held_duration > 0:
+		$AnimatedSprite2D.animation = "channel"
+	elif velocity != Vector2.ZERO:
+		$AnimatedSprite2D.animation = "move"
 	else:
 		$AnimatedSprite2D.play()
-	
-	if velocity != Vector2.ZERO:
-		if not held_duration > 0:
-			$AnimatedSprite2D.animation = "move"
-			if velocity.x != 0:
-				lastHorizontalVelocity = velocity.x
-		
-				$AnimatedSprite2D.flip_h = lastHorizontalVelocity < 0
-		else:
-			$AnimatedSprite2D.animation = "idle"
-			if lastHorizontalVelocity != 0:
-				$AnimatedSprite2D.flip_h = lastHorizontalVelocity < 0
+		$AnimatedSprite2D.animation = "idle"
 
-	#if dead:
-		#$AnimatedSprite2D.animation = "death"
-		#$AnimatedSprite2D.stop()
-	#elif held_duration > 0:
-		#$AnimatedSprite2D.animation = "channel"
-	#elif velocity != Vector2.ZERO:
-		#$AnimatedSprite2D.animation = "move"
-		#lastHorizontalVelocity = velocity.x
-		#$AnimatedSprite2D.flip_h = lastHorizontalVelocity < 0
-	#else:
-		#$AnimatedSprite2D.play()
-		#$AnimatedSprite2D.animation = "idle"
-		#if lastHorizontalVelocity != 0:
-			#$AnimatedSprite2D.flip_h = lastHorizontalVelocity < 0
+	if velocity.x != 0:
+		lastHorizontalVelocity = velocity.x
+		$AnimatedSprite2D.flip_h = lastHorizontalVelocity < 0

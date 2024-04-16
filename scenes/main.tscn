@@ -6,4 +6,3 @@
 
 [node name="playerCharacter" parent="." instance=ExtResource("1_bsaxl")]
 speed = 200
-dead = false
