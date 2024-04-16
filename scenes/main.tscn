@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8wvyqyfdo46l"]
+
+[ext_resource type="PackedScene" uid="uid://4lhyrreb64fi" path="res://scenes/player_character.tscn" id="1_bsaxl"]
+
+[node name="Main" type="Node"]
+
+[node name="playerCharacter" parent="." instance=ExtResource("1_bsaxl")]
+speed = 200
+dead = false

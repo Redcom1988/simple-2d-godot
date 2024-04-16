@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8v2o7fbmwsc7"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_r5aag"]
+[ext_resource type="Script" path="res://scripts/HitboxComponent.gd" id="2_lihcg"]
+[ext_resource type="Script" path="res://scripts/HealthComponent.gd" id="3_a842i"]
+[ext_resource type="Script" path="res://scenes/AttackComponent.gd" id="4_qljfs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qvnvq"]
+radius = 12.0
+height = 42.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_r5aag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_compponent")]
+script = ExtResource("2_lihcg")
+health_compponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+show_behind_parent = true
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_qvnvq")
+debug_color = Color(0.427451, 0.545098, 0.694118, 0.419608)
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_a842i")
+MAX_HEALTH = null
+
+[node name="AttackComponent" type="Node2D" parent="."]
+script = ExtResource("4_qljfs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AttackComponent"]
+
+[node name="Hitbox" type="Area2D" parent="AttackComponent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent/Hitbox"]
