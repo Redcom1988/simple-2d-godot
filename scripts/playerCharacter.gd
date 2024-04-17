@@ -2,7 +2,7 @@ extends CharacterBody2D
 signal ping
 
 @export var speed = 150
-@export var dead = false
+@export var player_alive = true
 #var currentPos : Transform2D
 var lastHorizontalVelocity : int  
 var held_duration : float
@@ -57,7 +57,7 @@ func clampEntity():
 func animation_handler():
 	get_input()
 
-	if dead:
+	if not player_alive:
 		$AnimatedSprite2D.animation = "death"
 		$AnimatedSprite2D.stop()
 	elif held_duration > 0:
